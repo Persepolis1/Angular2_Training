@@ -3,6 +3,7 @@ import {IProduct} from "./product";
 import {ProductFilterPipe} from "./product-filter.pipe";
 import {StarComponent} from "../shared/star-component";
 import {ProductService} from "./product.service";
+
 /**
  * Created by bobak on 2016-07-28.
  */
@@ -19,6 +20,7 @@ export class ProductListComponent implements OnInit{
     imageMargin : number = 2;
     showImage:boolean = false;
     listFilter:string;
+    errorMessage : string;
     products: IProduct[];
 
     constructor(private _productService : ProductService){
@@ -28,7 +30,10 @@ export class ProductListComponent implements OnInit{
         this.showImage = !this.showImage;
     }
     ngOnInit(): void{
-        this.products = this._productService.getProducts();
+        this._productService.getProducts()
+            .subscribe(
+                products => this.products = products,
+                error  => this.errorMessage = <any>error);
     }
     onRatingClicked(message: string) : void {
         this.pageTitle = "Product List : " + message;
