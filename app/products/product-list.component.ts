@@ -3,16 +3,16 @@ import {IProduct} from "./product";
 import {ProductFilterPipe} from "./product-filter.pipe";
 import {StarComponent} from "../shared/star-component";
 import {ProductService} from "./product.service";
+import {ROUTER_DIRECTIVES} from "angular2/router";
 
 /**
  * Created by bobak on 2016-07-28.
  */
 @Component({
-    selector: 'pm-products',
     templateUrl: 'app/products/product-list.component.html',
     styleUrls: ['app/products/product-list.component.css'],
     pipes: [ProductFilterPipe],
-    directives:[StarComponent]
+    directives:[StarComponent, ROUTER_DIRECTIVES]
 })
 export class ProductListComponent implements OnInit{
     pageTitle: string = "Product List";
